@@ -44,7 +44,7 @@ abstract class Client {
   /// Sends an HTTP POST request with the given headers and body to the given
   /// URL.
   ///
-  /// [body] sets the body of the request. It can be a [String], a [List<int>]
+  /// [body] sets the body of the request. It must be a [String], a [List<int>]
   /// or a [Map<String, String>]. If it's a String, it's encoded using
   /// [encoding] and used as the body of the request. The content-type of the
   /// request will default to "text/plain".
@@ -65,7 +65,7 @@ abstract class Client {
   /// Sends an HTTP PUT request with the given headers and body to the given
   /// URL.
   ///
-  /// [body] sets the body of the request. It can be a [String], a [List<int>]
+  /// [body] sets the body of the request. It must be a [String], a [List<int>]
   /// or a [Map<String, String>]. If it's a String, it's encoded using
   /// [encoding] and used as the body of the request. The content-type of the
   /// request will default to "text/plain".
@@ -86,7 +86,7 @@ abstract class Client {
   /// Sends an HTTP PATCH request with the given headers and body to the given
   /// URL.
   ///
-  /// [body] sets the body of the request. It can be a [String], a [List<int>]
+  /// [body] sets the body of the request. It must be a [String], a [List<int>]
   /// or a [Map<String, String>]. If it's a String, it's encoded using
   /// [encoding] and used as the body of the request. The content-type of the
   /// request will default to "text/plain".
