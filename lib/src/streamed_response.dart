@@ -18,7 +18,7 @@ class StreamedResponse extends BaseResponse {
   /// Creates a new streaming response.
   ///
   /// [stream] should be a single-subscription stream.
-  StreamedResponse(Stream<List<int>> stream, int statusCode,
+  StreamedResponse(Stream<List<int>> stream, int statusCode, DateTime start, DateTime end,
       {int? contentLength,
       BaseRequest? request,
       Map<String, String> headers = const {},
@@ -26,7 +26,7 @@ class StreamedResponse extends BaseResponse {
       bool persistentConnection = true,
       String? reasonPhrase})
       : stream = toByteStream(stream),
-        super(statusCode,
+        super(statusCode, start, end,
             contentLength: contentLength,
             request: request,
             headers: headers,

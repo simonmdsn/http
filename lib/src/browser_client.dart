@@ -49,12 +49,14 @@ class BrowserClient extends BaseClient {
       ..withCredentials = withCredentials;
     request.headers.forEach(xhr.setRequestHeader);
 
+    final start = DateTime.now();
     var completer = Completer<StreamedResponse>();
+    final end = DateTime.now();
 
     unawaited(xhr.onLoad.first.then((_) {
       var body = (xhr.response as ByteBuffer).asUint8List();
       completer.complete(StreamedResponse(
-          ByteStream.fromBytes(body), xhr.status!,
+          ByteStream.fromBytes(body), xhr.status!, start, end,
           contentLength: body.length,
           request: request,
           headers: xhr.responseHeaders,

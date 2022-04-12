@@ -17,7 +17,7 @@ class IOStreamedResponse extends StreamedResponse {
   /// [stream] should be a single-subscription stream.
   ///
   /// If [inner] is not provided, [detachSocket] will throw.
-  IOStreamedResponse(Stream<List<int>> stream, int statusCode,
+  IOStreamedResponse(Stream<List<int>> stream, int statusCode, DateTime start, DateTime end,
       {int? contentLength,
       BaseRequest? request,
       Map<String, String> headers = const {},
@@ -26,7 +26,7 @@ class IOStreamedResponse extends StreamedResponse {
       String? reasonPhrase,
       HttpClientResponse? inner})
       : _inner = inner,
-        super(stream, statusCode,
+        super(stream, statusCode, start, end,
             contentLength: contentLength,
             request: request,
             headers: headers,

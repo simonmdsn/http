@@ -41,7 +41,9 @@ class IOClient extends BaseClient {
         ioRequest.headers.set(name, value);
       });
 
+      final start = DateTime.now();
       var response = await stream.pipe(ioRequest) as HttpClientResponse;
+      final end = DateTime.now();
 
       var headers = <String, String>{};
       response.headers.forEach((key, values) {
@@ -54,6 +56,8 @@ class IOClient extends BaseClient {
             throw ClientException(httpException.message, httpException.uri);
           }, test: (error) => error is HttpException),
           response.statusCode,
+          start,
+          end,
           contentLength:
               response.contentLength == -1 ? null : response.contentLength,
           request: request,

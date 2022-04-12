@@ -28,13 +28,13 @@ class Response extends BaseResponse {
   String get body => _encodingForHeaders(headers).decode(bodyBytes);
 
   /// Creates a new HTTP response with a string body.
-  Response(String body, int statusCode,
+  Response(String body, int statusCode, DateTime start, DateTime end,
       {BaseRequest? request,
       Map<String, String> headers = const {},
       bool isRedirect = false,
       bool persistentConnection = true,
       String? reasonPhrase})
-      : this.bytes(_encodingForHeaders(headers).encode(body), statusCode,
+      : this.bytes(_encodingForHeaders(headers).encode(body), statusCode, start, end,
             request: request,
             headers: headers,
             isRedirect: isRedirect,
@@ -42,14 +42,14 @@ class Response extends BaseResponse {
             reasonPhrase: reasonPhrase);
 
   /// Create a new HTTP response with a byte array body.
-  Response.bytes(List<int> bodyBytes, int statusCode,
+  Response.bytes(List<int> bodyBytes, int statusCode, DateTime start, DateTime end,
       {BaseRequest? request,
       Map<String, String> headers = const {},
       bool isRedirect = false,
       bool persistentConnection = true,
       String? reasonPhrase})
       : bodyBytes = toUint8List(bodyBytes),
-        super(statusCode,
+        super(statusCode, start, end,
             contentLength: bodyBytes.length,
             request: request,
             headers: headers,
@@ -61,7 +61,7 @@ class Response extends BaseResponse {
   /// available from a [StreamedResponse].
   static Future<Response> fromStream(StreamedResponse response) async {
     final body = await response.stream.toBytes();
-    return Response.bytes(body, response.statusCode,
+    return Response.bytes(body, response.statusCode, response.start, response.end,
         request: response.request,
         headers: response.headers,
         isRedirect: response.isRedirect,

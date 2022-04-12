@@ -41,7 +41,7 @@ class MockClient extends BaseClient {
 
           final response = await fn(request);
           return StreamedResponse(
-              ByteStream.fromBytes(response.bodyBytes), response.statusCode,
+              ByteStream.fromBytes(response.bodyBytes), response.statusCode, response.start, response.end,
               contentLength: response.contentLength,
               request: baseRequest,
               headers: response.headers,
@@ -55,7 +55,7 @@ class MockClient extends BaseClient {
   MockClient.streaming(MockClientStreamHandler fn)
       : this._((request, bodyStream) async {
           final response = await fn(request, bodyStream);
-          return StreamedResponse(response.stream, response.statusCode,
+          return StreamedResponse(response.stream, response.statusCode, response.start, response.end,
               contentLength: response.contentLength,
               request: request,
               headers: response.headers,

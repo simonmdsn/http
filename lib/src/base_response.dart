@@ -34,7 +34,10 @@ abstract class BaseResponse {
   /// Whether the server requested that a persistent connection be maintained.
   final bool persistentConnection;
 
-  BaseResponse(this.statusCode,
+  final DateTime start;
+  final DateTime end;
+
+  BaseResponse(this.statusCode, this.start, this.end,
       {this.contentLength,
       this.request,
       this.headers = const {},

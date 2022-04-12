@@ -89,6 +89,7 @@ abstract class BaseRequest {
   bool _finalized = false;
 
   static final _tokenRE = RegExp(r"^[\w!#%&'*+\-.^`|~]+$");
+
   static String _validateMethod(String method) {
     if (!_tokenRE.hasMatch(method)) {
       throw ArgumentError.value(method, 'method', 'Not a valid method');
@@ -132,7 +133,7 @@ abstract class BaseRequest {
     try {
       var response = await client.send(this);
       var stream = onDone(response.stream, client.close);
-      return StreamedResponse(ByteStream(stream), response.statusCode,
+      return StreamedResponse(ByteStream(stream), response.statusCode, response.start, response.end,
           contentLength: response.contentLength,
           request: response.request,
           headers: response.headers,
