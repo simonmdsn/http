@@ -1,4 +1,5 @@
-name: http
+# had to rename because of issues relying on official http package
+name: dhttp
 version: 0.13.4
 homepage: https://github.com/dart-lang/http
 description: A composable, multi-platform, Future-based API for HTTP requests.
